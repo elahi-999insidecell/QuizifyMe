@@ -30,8 +30,15 @@ class _QuestionScreenState extends State<QuestionScreen> {
  @override
 void initState() {
   super.initState();
- context.read<QuizProvider>().resetQuiz();
+   
+
   _questionFuture = QuizDbHelper.getQuestions(widget.category.id);
+
+  WidgetsBinding.instance.addPostFrameCallback((_) {
+    if (mounted) {
+      context.read<QuizProvider>().resetQuiz();
+    }
+  });
 }
 
   //timer starting function
